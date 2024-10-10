@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+}
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5dc;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7); /* Glowing effect */
+    padding: 1px 100px; /* Add padding to ensure space around the header image */
+    position: relative;
+    z-index: 10;
+    height: 200px; /* Set the height of the header */
+}
+
+.header-container {
+    width: 100%; /* Ensure the header image spans the width of the header */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.header-image {
+    width: auto; /* Maintain aspect ratio */
+    height: 100%; /* Ensure the image height fills the header */
+    max-height: 200px; /* Prevent the image from growing too large */
+    object-fit: cover; /* Ensure the image covers the header without distortion */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow effect */
+}
+/* Background Video */
+.backvid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* Behind all other content */
+    object-fit: cover;
+    background-color: black; /* Fallback background color */
+}
+
+/* Smoke Effect */
+.smoke-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('smoke.gif') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 3s forwards;
+    z-index: 100;
+}
+
+.smoke-title {
+    font-size: 4em;
+    color: #ffffff;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Hide the main content and footer until the smoke animation finishes */
+.hidden {
+    display: none;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Main Content */
+#main-content {
+    text-align: center;
+    padding-top: 50px;
+}
+
+
+#main-content.active {
+    display: block;
+    overflow: auto;
+}
+
+.title {
+    font-size: 4em;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+.title span {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.title span:hover {
+    transform: scale(1.2);
+}
+
+/* Words on Hover */
+.title span:hover::before {
+    content: attr(data-word); /* Fetches custom data-word attribute */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5em;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0; /* Reduce padding to decrease footer size */
+    background-color: #121212;
+    color: #e0e0e0;
+    overflow: hidden; /* Ensure footer doesn't cause overflow */
+    display: none; /* Hide footer initially */
+}
+
+footer.active {
+    display: block; /* Show footer after smoke effect */
+}
+
+.footer-note {
+    font-size: 1em; /* Adjust font size to fit new footer size */
+    margin-bottom: 10px; /* Reduce margin to fit content */
+    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    color: silver;
+    font-size: large;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Reduce gap to fit new footer size */
+    margin-bottom: 10px; /* Reduce margin to fit new footer size */
+}
+
+.social-icon {
+    display: inline-block;
+    width: 40px; /* Reduce size to fit new footer size */
+    height: 40px; /* Reduce size to fit new footer size */
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.social-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.social-icon:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    transform: scale(1.1);
+}
+
+/* Menu Items */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+    overflow: hidden; /* Ensure no scrollbars appear */
+}
+
+.menu-item {
+    margin: 10px;
+    padding: 20px;
+    background-color: #333;
+    color: #e0e0e0;
+    font-size: 1.5em;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid transparent; /* Initial border */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, border 0.3s; /* Add transition for border and shadow */
+    overflow: hidden; /* Ensure no overflow happens on hover */
+}
+
+.menu-item:hover {
+    background-color: #555;
+    transform: scale(1.1);
+    cursor: pointer;
+    border: 2px solid gold; /* Gold border on hover */
+    box-shadow: 0 0 15px gold; /* Gold shadow effect */
+}
+
+
+/* Activities Section */
+.activities-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.department-activities-box {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 2px solid transparent;
+}
+
+.department-activities-box:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    transform: scale(1.05);
+    border-color: gold;
+}
+
+.department-activities {
+    text-align: center;
+}
+
+.department-activities-img {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.department-activities-img img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s;
+}
+
+.department-activities-img img:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Card Layout */
+.card-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 2px solid transparent;
+    position: relative;
+    width: 300px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    transform: scale(1.05);
+    border-color: gold;
+}
+
+.card img {
+    width: 100%;
+    height: 75%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: border-radius 0.3s, transform 0.3s;
+}
+
+.card img:hover {
+    border-radius: 50%;
+    transform: scale(1.1);
+}
+
+.card .description {
+    font-size: 1em;
+    line-height: 1.6;
+}
